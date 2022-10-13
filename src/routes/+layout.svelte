@@ -3,6 +3,8 @@
 	import Header from '../lib/components/both/Header.svelte';
 	import '../app.css';
 	import Sidebar from '$lib/components/desktop/Sidebar.svelte';
+	import SmallCardGroup from '$lib/components/both/SmallCardGroup.svelte';
+	import BigCard from '$lib/components/both/BigCard.svelte';
 </script>
 
 <Header />
@@ -12,6 +14,10 @@
 	<main>
 		<div class="blur"/>
     <div class="top left-0 md:left-72">
+      <div class="py-4 px-10">
+        <SmallCardGroup/>
+        <BigCard/>
+      </div>
       <slot />
       <slot />
       <slot />
@@ -28,7 +34,7 @@
 
   .top {
     position: fixed;
-    z-index: 999;
+    z-index: 30;
     top: 12vh;
     bottom: 0;
     right: 0;
@@ -55,4 +61,7 @@
 		background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
 		filter: blur(100%);
 	}
+
+
+
 </style>
