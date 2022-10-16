@@ -14,12 +14,10 @@
 	<main>
 		<div class="blur"/>
     <div class="top left-0 md:left-72">
-      <div class="py-4 px-10">
-        <SmallCardGroup/>
-        <BigCard/>
-      </div>
-      <slot />
-      <slot />
+		<!-- <div class="">
+			<SmallCardGroup/>
+			<BigCard/>
+		</div> -->
       <slot />
     </div>
 	</main>
