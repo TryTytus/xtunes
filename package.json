@@ -51,6 +51,10 @@
   },
   "type": "module",
   "dependencies": {
-    "@supabase/supabase-js": "^1.35.7"
+    "@supabase/supabase-js": "^1.35.7",
+    "@types/cheerio": "^0.22.31",
+    "cheerio": "^1.0.0-rc.12",
+    "puppeteer": "^19.0.0",
+    "youtubei.js": "^2.3.2"
   }
 }
