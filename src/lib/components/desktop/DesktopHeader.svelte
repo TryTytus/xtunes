@@ -20,7 +20,7 @@
 		searchResults.update((x) => {
 			if (Array.isArray(data.results) && data.results.length) {
 				const videos = data.results.filter((x:any) => x.type === 'Video');
-				x = videos.slice(0, 5);
+				x = videos.slice(0, 6);
 			}
 			return x;
 		});
