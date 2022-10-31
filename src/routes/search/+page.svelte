@@ -4,6 +4,7 @@
     import BestMatch from "$lib/components/desktop/BestMatch.svelte";
     import { searchResults } from '$lib/searchResults';
 	import SearchIcon from '$lib/components/icons/search_icon.svelte';
+	import EmbedVideo from "$lib/components/player/EmbedVideo.svelte";
 
     let videos:any = [];
 
@@ -36,6 +37,24 @@
 		// window.history.pushState(null, '', url.toString());
 	};
 
+    let yt = () => {
+		let parent = document.querySelector('#ben')
+		parent.innerHTML = ''
+		let iframe = document.createElement('iframe')
+		iframe.src = 'https://www.youtube.com/embed/ZEMBDKMtHqM?autoplay=1'
+		iframe.width = '560'
+		iframe.height = '315'
+		iframe.title = 'YouTube video player'
+		iframe.frameBorder = '0'
+		iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+		iframe.allowFullscreen = true
+		iframe.onload = () => {
+			let video = document.querySelector('.video-stream')
+			video.play()
+		}
+		parent?.appendChild(iframe)
+	}
+
 </script>
 
 
@@ -59,6 +78,8 @@
 
     <SearchItems />
 
+    <EmbedVideo/>
+    <!--<iframe autoplay class="" width="560" height="315" src="https://www.youtube.com/embed/ZEMBDKMtHqM?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 </section>
 
 

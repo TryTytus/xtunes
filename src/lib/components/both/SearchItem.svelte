@@ -2,13 +2,21 @@
 	import Title from "./Title.svelte";
     import More from "../icons/more.svelte";
 	import SearchItems from "./SearchItems.svelte";
+	import { video_id } from "../player/EmbedVideoState";
 
     export let item:any;
+
+    let play_result = () => {
+        video_id.set(item.id)
+    }
+
 </script>
 {#if item}
 <article id="article" class="flex justify-between my-4">
     <div class="flex items-center">
-        <img class="w-10 h-10 rounded-md object-cover" src={item.thumbnails[0]?.url} alt="" srcset="">
+        <button on:click={play_result}>
+            <img class="w-10 h-10 rounded-md object-cover" src={item.thumbnails[0]?.url} alt="" srcset="">
+        </button>
         <div class="ml-4 flex align-middle flex-col">
             <div class="" id="title">
                 <Title size="1rem" weight="Light" color="white" text_overflow="truncate">

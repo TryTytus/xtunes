@@ -10,8 +10,14 @@ const config = {
 	}),
 
 	kit: {
-		adapter: adapter()
-	}
+		adapter: adapter(),
+		// csp: {
+		// 	directives: {
+		// 		"default-src": ['*', 'https://www.youtube.com'],
+		// 		"prefetch-src": ['https://www.youtube.com']
+		// 	}
+		// }
+	},
 };
 
 export default config;
