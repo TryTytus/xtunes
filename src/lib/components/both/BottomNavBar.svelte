@@ -4,12 +4,14 @@
 	import MusicBar from '../mobile/MusicBar.svelte';
 </script>
 
-<nav class="p-2">
-	<MusicBar />
-	<BottomNavBarMobile />
-</nav>
-
-<MusicBarDesktop />
+<div>
+	<nav class="md:hidden p-2">
+		<MusicBar />
+		<BottomNavBarMobile />
+	</nav>
+	
+	<MusicBarDesktop />
+</div>
 
 <style scoped>
 	nav {

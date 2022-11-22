@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { playing, video_id } from './EmbedVideoState';
+	import { playing, update_time, video_id } from './EmbedVideoState';
 	import YouTubePlayer from 'youtube-player';
 	import { onMount } from 'svelte';
-	import { readable } from 'svelte/store';
+	import { readable, writable } from 'svelte/store';
+	import { current_time, duration, progress } from '$lib/stores/Time'
 	// let cos = async () => {
 	// 	const youtube = await Innertube.create({
 	// 		fetch: async (input: RequestInfo | URL, init?: RequestInit) =>{
@@ -16,14 +17,7 @@
 	// 		}
 	// 	});
 
-	let countTime = (secounds:any) => {
-		let time = new Date();
-		time.setSeconds(0)
-		time.setMinutes(0)
 
-		time.setSeconds(secounds)
-		return time.toISOString().substring(14, 19)
-	}
 
 	// 	// get the video info
 	// 	// const videoInfo = await youtube.getInfo('f8OHybVhQwc');
@@ -72,7 +66,7 @@
 	playing.subscribe((value) => {
 		if (is_paused !== value) {
 			if (value && videoID.length) {
-				yt(videoID);
+				resmue();
 			} else {
 				kill();
 			}
@@ -101,12 +95,16 @@
 	// 	parent?.appendChild(iframe);
 	// };
 	let player: any;
+	
+	
 
-	let jakw = '0:00';
+	let play_time:any;
 
-	$: play_time = jakw;
+	current_time.subscribe(value => {
+		play_time = value;
+	})
 
-	var myInterval:any;
+	var timer:any;
 
 	// let time = new Date();
 
@@ -114,7 +112,7 @@
 		player = YouTubePlayer('video-player');
 	});
 
-	let yt = (id: string) => {
+	let yt = async (id: string) => {
 		player.loadVideoById({
 			videoId: id,
 			startSeconds: 0.1,
@@ -124,24 +122,25 @@
 		player.playVideo();
 
 
-
-
-		if(!myInterval) {
-			myInterval = setInterval(async () => {;
+		if(!timer) {
+			timer = setInterval(async () => {;
 			// time.setSeconds(await player.getCurrentTime())
 			// jakw = time.toISOString().substring(14, 19);
 
-			jakw = countTime(await player.getCurrentTime())
-			console.log(jakw)
+			current_time.set(await player.getCurrentTime())
+			progress.set(await player.getVideoLoadedFraction())
+			duration.set(await player.getDuration())
+			console.log(await player.getDuration())
+			console.log(current_time)
 			console.log(await player.getCurrentTime())
 		}, 1000);
 		}
 	};
 
-	let kill = () => {
+	export let kill = () => {
 		// player = YouTubePlayer('video-player')
-		clearInterval(myInterval)
-		myInterval = null;
+		clearInterval(timer)
+		timer = null;
 		console.log('dupa');
 
 		player.pauseVideo();
@@ -150,44 +149,42 @@
 		// parent.innerHTML = '<video class="" id="video-player" />';
 	};
 
-	let resmue = () => {
+	export let resmue = () => {
 		player.playVideo()
-		if(!myInterval) {
-			myInterval = setInterval(async () => {;
+		if(!timer) {
+			timer = setInterval(async () => {;
 			// time.setSeconds(await player.getCurrentTime())
 			// jakw = time.toISOString().substring(14, 19);
-			jakw = countTime(await player.getCurrentTime())
+			current_time.set(await player.getCurrentTime())
 
-			console.log(jakw)
+			console.log(current_time)
 			console.log(await player.getCurrentTime())
-		}, 1000);
+		},1000);
 		}
 	}
 
+
+	update_time.subscribe((v:Array<boolean|number>) => {
+		if (v[0]) {
+			state(v[1])
+			v[0] = false
+		}
+	})
 	// const time = readable(0., async function start(set) {
 	// const interval = setInterval(() => {
 	// 	set(await player.getVideoLoadedFraction());
 	// }, 1000);
 
-	let state = async () => {
-		// player.seekTo(20);
+	let state = async (time:number) => {
+		 player.seekTo(Math.floor(time))
+	}
 
-		if (player.getCurrentTime()) {
-			player.getCurrentTime().then(console.log)
-		}
-	};
 </script>
 
-<div class="absolute z-50" id="ben">
-	<video class="hidden" id="video-player" />
+<div class="relative top-0 right-0" id="ben">
+	<video class="hidden " id="video-player" />
 </div>
 
-<button on:click={kill} class="absolute left-0  text-white">click</button>
-
- <h1 class="absolute top-0 left-12 text-white">
-	{play_time}
- </h1>
-<button on:click={resmue} class="absolute right-0 text-white">eeee</button>
 
 <!-- // <iframe width="560" height="315" src="https://www.youtube.com/embed/ZEMBDKMtHqM?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"  allowfullscreen></iframe> -->
 

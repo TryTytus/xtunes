@@ -1,0 +1,44 @@
+<script lang="ts">
+	import EmbedVideo from '$lib/components/player/EmbedVideo.svelte';
+	import { playing } from '../player/EmbedVideoState';
+    
+
+    let is_playing = false;
+
+    playing.subscribe(v => {
+        is_playing = v;
+    })
+
+let size = 6
+
+
+</script>
+
+{#if !is_playing}
+<button on:click={() => {
+    playing.set(true)
+}}>
+
+<svg width="2.5rem" height="2.5rem" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="15" fill="black"/>
+    <path d="M11 9.93893C11 9.22559 11.7642 8.77393 12.3892 9.11726L22.0058 14.4073C22.1528 14.4882 22.2754 14.6071 22.3608 14.7515C22.4461 14.896 22.4912 15.0607 22.4912 15.2285C22.4912 15.3963 22.4461 15.561 22.3608 15.7055C22.2754 15.8499 22.1528 15.9688 22.0058 16.0498L12.3892 21.3389C12.2465 21.4174 12.0858 21.4573 11.923 21.4548C11.7601 21.4523 11.6008 21.4074 11.4606 21.3245C11.3204 21.2417 11.2042 21.1238 11.1234 20.9824C11.0427 20.8409 11.0001 20.6809 11 20.5181V9.93893V9.93893Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    
+</button>
+{:else}
+<button on:click={() => {
+    playing.set(false)
+}}>
+<svg width="2.5rem" height="2.5rem" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="15" fill="black"/>
+    <path d="M18.125 9.375V20.625M11.875 9.375V20.625" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</button>
+{/if}
+
+
+
+
+
+  
+

@@ -2,12 +2,19 @@
 	import Title from "./Title.svelte";
     import More from "../icons/more.svelte";
 	import SearchItems from "./SearchItems.svelte";
-	import { video_id } from "../player/EmbedVideoState";
+	import { playing, video_id } from "../player/EmbedVideoState";
+	import { music_info } from "$lib/stores/Current_Playing";
 
     export let item:any;
 
     let play_result = () => {
         video_id.set(item.id)
+        music_info.set({
+            'title': item.title.text,
+            'author': item.author.name,
+            'img': item.thumbnails[0]?.url
+        })
+        playing.set(true)
     }
 
 </script>

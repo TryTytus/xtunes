@@ -12,7 +12,7 @@
 		<img class="h-40 w-40 rounded-md" src={img} alt="" srcset="" />
 		<div>
 			<div class="max-h-36 text-ellipsis overflow-hidden">
-				<Title color="white" size="2rem">{title}</Title>
+				<Title line_height="2.2rem" color="white" size="2rem">{title}</Title>
 			</div>
 			<Title color="#8A8A8A" weight="Light" size="1.2rem">{author}</Title>
 		</div>

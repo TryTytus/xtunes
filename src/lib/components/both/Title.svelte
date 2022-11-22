@@ -6,19 +6,21 @@
 	export let weight:Weight = 'Black';
 	export let text_overflow:TextOverflow = ''
 	export let align = 'center'
+	export let line_height = '1.3rem'
 </script>
 
 <h6
 	style:font-family={`ProductSans-${weight}`}
 	style:color
 	style:font-size={size}
-	class={`text-${align} ${text_overflow} `}
+	class={`text-${align} ${text_overflow}`}
+	style:line-height={line_height}
 >
 	<slot />
 </h6>
 
 <style scoped>
-
+	
 	@font-face {
 		font-family: 'ProductSans-Black';
 		src: url('ProductSans-Black.ttf') format('ttf');
