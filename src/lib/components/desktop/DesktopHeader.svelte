@@ -20,7 +20,7 @@
 		searchResults.update((x) => {
 			if (Array.isArray(data.results) && data.results.length) {
 				const videos = data.results.filter((x:any) => x.type === 'Video');
-				x = videos.slice(0, 6);
+				x = videos;
 			}
 			return x;
 		});
@@ -56,8 +56,7 @@
 
 <style scoped>
 	header {
-		height: 12vh;
-		background-color: #1e1e1e;
+		grid-area: header;
 	}
 
 	.search {

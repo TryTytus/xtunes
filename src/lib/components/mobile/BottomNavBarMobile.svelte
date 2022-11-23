@@ -7,7 +7,7 @@
 
 </script>
 
-<nav class="md:hidden m-1 bg-white rounded-xl flex justify-between pt-3 px-10">
+<nav class="m-1 bg-white rounded-xl flex justify-between pt-3 px-10">
         
     <BottomNavBarItem title="home">
         <Home/>

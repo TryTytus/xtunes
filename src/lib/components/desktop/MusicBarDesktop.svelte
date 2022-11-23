@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { music_info } from '$lib/stores/Current_Playing';
-	import { current_time, duration, progress } from '$lib/stores/Time';
+	import { current_time, duration } from '$lib/stores/Time';
 	import Title from '../both/Title.svelte';
 	import HeartFilled from '../icons/heart_filled.svelte';
 	import PlayingAnimation from '../icons/playing_animation.svelte';
@@ -9,6 +9,7 @@
 	import SkipLeft from '../icons/skip_left.svelte';
 	import SkipRight from '../icons/skip_right.svelte';
 	import { update_time } from '../player/EmbedVideoState';
+	import { countTime } from '$lib/hooks/countTime';
 
 	export let duration_act: any;
 	let bar = 0;
@@ -20,14 +21,7 @@
 	//     bar = Math.floor(value * 100);
 	//     console.log(Math.floor(value * 100))
 	// })
-	let countTime = (secounds: any) => {
-		let time = new Date();
-		time.setSeconds(0);
-		time.setMinutes(0);
 
-		time.setSeconds(secounds);
-		return time.toISOString().substring(14, 19);
-	};
 
 	duration.subscribe((v) => {
 		duration_act = v;
@@ -68,7 +62,7 @@
 
 <nav class="w-full h-20 hidden md:grid fixed z-50 bottom-0 left-0 right-0 bg-white">
 	<div class="flex items-center pl-4 gap-x-3">
-		<img class="w-16 h-16" src={music?.img} alt="" />
+		<img class="w-16 h-16 object-cover" src={music?.img} alt="" />
 		<div class="h-full pt-2">
 			<Title weight="Medium" size="1.2rem">{music?.title}</Title>
 			<Title weight="Light" size="0.9rem">{music?.author}</Title>

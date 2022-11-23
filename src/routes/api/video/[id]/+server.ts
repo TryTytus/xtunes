@@ -18,13 +18,14 @@ export const GET: RequestHandler = async (event) => {
 
     if (id) {
         const videoInfo = await youtube.search(id, {
-            type: 'video'   
+            type: 'video'
         });
 
         return json({
              ...videoInfo
         });
     }
+
 
 	// const $ = await cheerio.load(data);
 
@@ -35,11 +36,15 @@ export const GET: RequestHandler = async (event) => {
     // const browser = await puppeteer.launch();
     // const page = await browser.newPage();
 
-    // await page.goto('https://www.youtube.com/results?search_query=never+gonna+give+you+up');
+    // await page.goto('ghttps://www.youtube.com/results?search_query=never+onna+give+you+up');
 
 	// $('#img').each((i, img) => {
     //     const src = $(img).attr('src')
     //     imgs.push(src);
     // });
+    // return json({
+    //     dupa: 'dupa'
+    // });
+
     return;
 };

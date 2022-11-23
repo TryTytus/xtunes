@@ -27,7 +27,7 @@
 		searchResults.update((x) => {
 			if (Array.isArray(data.results) && data.results.length) {
 				const videos = data.results.filter((x:any) => x.type === 'Video');
-				x = videos.slice(0, 7);
+				x = videos;
 			}
 			return x;
 		});
@@ -57,15 +57,15 @@
 
 </script>
 
-
-<section class="grid md:pt-6 pb-4 px-4 lg:py-10 lg:px-10">
+<div class="p-4 master h-full overflow-hidden">
+<section class="flex flex-col h-full md:grid overflow-hidden">
 
     <BestMatch
     img={videos[0]?.thumbnails[0]?.url}
     author={videos[0]?.author.name}
     title={videos[0]?.title.text}
     />
-    <div class="md:hidden">
+    <div class="md:hidden ">
 		<input
             on:input={search}
             bind:value={seach_input}
@@ -81,14 +81,32 @@
     <EmbedVideo/>
     <!--<iframe autoplay class="" width="560" height="315" src="https://www.youtube.com/embed/ZEMBDKMtHqM?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 </section>
-
+</div>
 
 <style scoped>
+
+section {
+        grid-template-rows: min-content 1fr;
+    }
+
+
+@media  (min-width: 768px) and (max-width: 1024px) {
     section {
-        position: fixed;
-        width: 100%;
-        top: 12vh;
-        bottom: 9rem;
+        grid-template-rows: 1fr;
+    }
+}
+
+@media (min-width: 1024px) {
+    section {
+        place-content: center;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 23rem;
+        gap: 2rem;
+    }
+}
+
+    /* section {
+
         grid-template-rows: 6rem 1fr;
     }
 
@@ -121,6 +139,6 @@
         top: 12vh;
         grid-template-rows: 85%;
     }
-}
+} */
 </style>
 

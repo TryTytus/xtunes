@@ -28,3 +28,9 @@
  <section class="w-11/12 m-auto h-1 bg-white"/>
 
 </aside>
+
+<style>
+    aside {
+        grid-area: sidebar;
+    }
+</style>

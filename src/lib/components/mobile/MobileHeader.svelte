@@ -11,8 +11,8 @@
 </header>
 
 <style scoped>
+
     header {
-        height: 12vh;
-        background-color: #1E1E1E;
+        grid-area: header;
     }
 </style>
